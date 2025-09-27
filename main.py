@@ -1,6 +1,6 @@
 from datetime import datetime
 from daten_speichern import speichere_daten
-from stiko_regeln import pruefe_tetanus
+from stiko_regeln import pruefe_tetanus, pruefe_diphtherie
 
 DATE_FORMAT = "%d.%m.%Y"
 
@@ -69,6 +69,12 @@ def auswertung_ausgeben(daten):
         daten["impfungen"].get("Tetanus")
     )
     print(f"Tetanus: {tetanus_status}")
+
+    diphtherie_status = pruefe_diphtherie(
+        daten["geburtsdatum"],
+        daten["impfungen"].get("Diphtherie")
+    )
+    print(f"Diphtherie: {diphtherie_status}")
 
 def main():
     daten = frage_nutzer()
