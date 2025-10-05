@@ -4,7 +4,7 @@ from stiko_regeln import pruefe_tetanus, pruefe_diphtherie
 
 DATE_FORMAT = "%d.%m.%Y"
 
-impfstoffe = [
+vaccinations = [
     "Tetanus",
     "Diphtherie",
     "Pertussis",
@@ -23,64 +23,64 @@ impfstoffe = [
     "RSV (Respiratorische Synzytial-Viren)"
 ]
 
-def frage_nutzer():
+def ask_user():
     print("Willkommen zum Impfzeit-Programm basierend auf Empfehlungen der Ständigen Impfkommission\n")
     
     name = input("Wie ist dein Name? > ").strip()
 
-    geburtsdatum_str = input("Wann wurdest du geboren? (TT.MM.JJJJ) > ").strip()
+    birthday_str = input("Wann wurdest du geboren? (TT.MM.JJJJ) > ").strip()
     try:
-        geburtsdatum = datetime.strptime(geburtsdatum_str, DATE_FORMAT)
+        birthday = datetime.strptime(birthday_str, DATE_FORMAT)
     except ValueError:
         print("Ungültiges Datum. Bitte im Format TT.MM.JJJJ eingeben.")
         return None
 
-    geschlecht = input("Geschlecht (männlich/weiblich/divers) > ").strip().lower()
+    sex = input("Geschlecht (männlich/weiblich/divers) > ").strip().lower()
 
-    impfungen = {}
+    vaccines = {}
     print("\nBitte gib das Datum deiner letzten Impfung ein (TT.MM.JJJJ). Wenn unbekannt, einfach leer lassen.")
     
-    for impfung in impfstoffe:
-        datum = input(f"{impfung}: ").strip()
+    for vaccine in vaccinations:
+        datum = input(f"{vaccine}: ").strip()
         if datum:
             try:
                 datum = datetime.strptime(datum, DATE_FORMAT).strftime(DATE_FORMAT)
-                impfungen[impfung] = datum
+                vaccines[vaccine] = datum
             except ValueError:
                 print("Ungültiges Datum – überspringe diese Impfung.")
-                impfungen[impfung] = None
+                vaccines[vaccine] = None
         else:
-            impfungen[impfung] = None
+            vaccines[vaccine] = None
 
-    daten = {
+    data = {
         "name": name,
-        "geburtsdatum": geburtsdatum.strftime(DATE_FORMAT),
-        "geschlecht": geschlecht,
-        "impfungen": impfungen
+        "birthday": birthday.strftime(DATE_FORMAT),
+        "sex": sex,
+        "vaccinations": vaccines
     }
 
-    return daten
+    return data
 
-def auswertung_ausgeben(daten):
+def auswertung_ausgeben(data):
     print("\nImpfempfehlungen laut STIKO:\n")
 
     tetanus_status = pruefe_tetanus(
-        daten["geburtsdatum"],
-        daten["impfungen"].get("Tetanus")
+        data["birthday"],
+        data["impfungen"].get("Tetanus")
     )
     print(f"Tetanus: {tetanus_status}")
 
     diphtherie_status = pruefe_diphtherie(
-        daten["geburtsdatum"],
-        daten["impfungen"].get("Diphtherie")
+        data["birthday"],
+        data["impfungen"].get("Diphtherie")
     )
     print(f"Diphtherie: {diphtherie_status}")
 
 def main():
-    daten = frage_nutzer()
-    if daten:
-        speichere_daten(daten)
-        auswertung_ausgeben(daten)
+    data = ask_user()
+    if data:
+        speichere_data(data)
+        auswertung_ausgeben(data)
 
 if __name__ == "__main__":
     main()
