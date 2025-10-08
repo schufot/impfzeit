@@ -5,26 +5,7 @@ from datetime import datetime
 
 DATE_FORMAT = "%d.%m.%Y"
 
-def check_tetanus(birthdate_str, last_vaccination_str):
-    today = datetime.today()
-
-    if is_empty_or_none(last_vaccination_str):
-        return "Keine Angabe zur letzten Tetanus-Impfung – bitte beim Arzt prüfen."
-
-    try:
-        last_vaccination = datetime.strptime(last_vaccination_str, DATE_FORMAT)
-    except ValueError:
-        return "Ungültiges Impfdatum für Tetanus."
-
-    difference = today - last_vaccination
-    years_since = difference.days / 365.25
-
-    if years_since > 10:
-        return f"Tetanus-Auffrischung empfohlen – letzte Impfung liegt über {int(years_since)} Jahren zurück."
-    else:
-        return f"Tetanus-Impfung in Ordnung – letzte Impfung vor {int(years_since)} Jahren."
-
-def check_diphtheria(birthdate_str, last_vaccination_str):
+def check_auffrischimpfung(birthdate_str, last_vaccination_str):
     today = datetime.today()
 
     if is_empty_or_none(last_vaccination_str):
