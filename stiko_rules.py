@@ -18,3 +18,7 @@ def check_tetanus(birthday_str, last_vaccination_str):
         return "Auffrischimpfung fällig (letzte Impfung >10 Jahre her)."
     else:
         return "Auffrischimpfung nicht fällig."
+
+def check_diphtheria(birthday_str, last_vaccination_str):
+    return check_tetanus(birthday_str, last_vaccination_str)
+
