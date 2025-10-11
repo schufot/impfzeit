@@ -1,6 +1,11 @@
 from datetime import datetime
 from save_data import save_data
-from stiko_rules import check_tetanus, check_diphtheria
+from stiko_rules import (
+    check_tetanus,
+    check_diphtheria,
+    check_pertussis,
+    check_measles,
+)
 
 DATE_FORMAT = "%d.%m.%Y"
 
@@ -24,7 +29,7 @@ VACCINATIONS = [
 ]
 
 def get_user_input():
-    print("Willkommen zum Impfzeit-Programm basierend auf Empfehlungen der Ständigen Impfkommission\n")
+    print("Willkommen zum Impfzeit-Programm basierend auf Empfehlungen der Ständigen Impfkommission (STIKO)\n")
     
     name = input("Wie ist dein Name? > ").strip()
 
@@ -64,17 +69,10 @@ def get_user_input():
 def print_evaluation(data):
     print("\nImpfempfehlungen laut STIKO:\n")
 
-    tetanus_status = check_tetanus(
-        data["birthday"],
-        data["vaccinations"].get("Tetanus")
-    )
-    print(f"Tetanus: {tetanus_status}")
-
-    diphtheria_status = check_diphtheria(
-        data["birthday"],
-        data["vaccinations"].get("Diphtherie")
-    )
-    print(f"Diphtherie: {diphtheria_status}")
+    print(f"Tetanus: {check_tetanus(data['birthday'], data['vaccinations'].get('Tetanus'))}")
+    print(f"Diphtherie: {check_diphtheria(data['birthday'], data['vaccinations'].get('Diphtherie'))}")
+    print(f"Pertussis: {check_pertussis(data['birthday'], data['vaccinations'].get('Pertussis'))}")
+    print(f"Masern: {check_measles(data['birthday'], data['vaccinations'].get('Masern'))}")
 
 def main():
     data = get_user_input()
