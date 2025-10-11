@@ -22,3 +22,13 @@ def check_tetanus(birthday_str, last_vaccination_str):
 def check_diphtheria(birthday_str, last_vaccination_str):
     return check_tetanus(birthday_str, last_vaccination_str)
 
+def check_pertussis(birthday_str, last_vaccination_str):
+    if not last_vaccination_str:
+        return "Auffrischimpfung empfohlen (kein Datum vorhanden)."
+    last_vaccination = parse_date(last_vaccination_str)
+    now = datetime.now()
+    delta = now - last_vaccination
+    if delta.days > 365 * 10:
+        return "Auffrischimpfung fällig (letzte Impfung >10 Jahre her)."
+    else:
+        return "Auffrischimpfung nicht fällig."
