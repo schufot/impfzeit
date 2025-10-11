@@ -1,28 +1,20 @@
 # Vaccination rules based on the STIKO calendar
 # https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Staendige-Impfkommission/Empfehlungen-der-STIKO/Empfehlungen/Impfkalender.pdf
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 DATE_FORMAT = "%d.%m.%Y"
 
-def check_auffrischimpfung(birthdate_str, last_vaccination_str):
-    today = datetime.today()
+def parse_date(date_str):
+    return datetime.strptime(date_str, DATE_FORMAT)
 
-    if is_empty_or_none(last_vaccination_str):
-        return "Keine Angabe zur letzten Diphtherie-Impfung – bitte beim Arzt prüfen."
-
-    try:
-        last_vaccination = datetime.strptime(last_vaccination_str, DATE_FORMAT)
-    except ValueError:
-        return "Ungültiges Impfdatum für Diphtherie."
-
-    difference = today - last_vaccination
-    years_since = difference.days / 365.25
-
-    if years_since > 10:
-        return f"Diphtherie-Auffrischung empfohlen – letzte Impfung liegt über {int(years_since)} Jahren zurück."
+def check_tetanus(birthday_str, last_vaccination_str):
+    if not last_vaccination_str:
+        return "Auffrischimpfung empfohlen (kein Datum vorhanden)."
+    last_vaccination = parse_date(last_vaccination_str)
+    now = datetime.now()
+    delta = now - last_vaccination
+    if delta.days > 365 * 10:
+        return "Auffrischimpfung fällig (letzte Impfung >10 Jahre her)."
     else:
-        return f"Diphtherie-Impfung in Ordnung – letzte Impfung vor {int(years_since)} Jahren."
-
-def is_empty_or_none(value):
-    return value is None or value.strip() == ""
+        return "Auffrischimpfung nicht fällig."
