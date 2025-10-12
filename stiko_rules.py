@@ -109,3 +109,15 @@ def check_pneumococcal(birthday_str, last_vaccination_str):
         return "Impfung liegt vor – Auffrischung alle 6 Jahre je nach Impfstoff prüfen."
     else:
         return "Keine Impfung routinemäßig empfohlen (unter 60, ohne Risikofaktoren)."
+
+def check_herpes_zoster(birthday_str, last_vaccination_str):
+    birthday = parse_date(birthday_str)
+    today = datetime.now()
+    age = (today - birthday).days // 365
+
+    if age >= 60:
+        if not last_vaccination_str:
+            return "Impfung gegen Herpes Zoster empfohlen (nicht nachgewiesen)."
+        return "Impfung liegt vor."
+    else:
+        return "Keine routinemäßige Impfung empfohlen (unter 60)."
