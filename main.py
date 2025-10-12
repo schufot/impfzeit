@@ -73,6 +73,19 @@ def print_evaluation(data):
     print(f"Diphtherie: {check_diphtheria(data['birthday'], data['vaccinations'].get('Diphtherie'))}")
     print(f"Pertussis: {check_pertussis(data['birthday'], data['vaccinations'].get('Pertussis'))}")
     print(f"Masern: {check_measles(data['birthday'], data['vaccinations'].get('Masern'))}")
+    print(f"Poliomyelitis: {check_polio(data['birthday'], data['vaccinations'].get('Poliomyelitis'))}")
+    print(f"Hepatitis B: {check_hepatitis_b(data['birthday'], data['vaccinations'].get('Hepatitis B'))}")
+    print(f"HPV: {check_hpv(data['birthday'], data['vaccinations'].get('HPV'))}")
+    print(f"Meningokokken C: {check_meningo_c(data['birthday'], data['vaccinations'].get('Meningokokken C'))}")
+    print(f"Mumps: {check_mumps(data['birthday'], data['vaccinations'].get('Mumps'))}")
+    print(f"Röteln: {check_rubella(data['birthday'], data['vaccinations'].get('Röteln'))}")
+    print(f"Varizellen: {check_varicella(data['birthday'], data['vaccinations'].get('Varizellen'))}")
+    print(f"Pneumokokken: {check_pneumococcal(data['birthday'], data['vaccinations'].get('Pneumokokken'))}")
+    print(f"Herpes Zoster: {check_herpes_zoster(data['birthday'], data['vaccinations'].get('Herpes Zoster'))}")
+    print(f"Influenza: {check_influenza(data['birthday'], data['vaccinations'].get('Influenza'))}")
+    print(f"COVID-19: {check_covid19(data['birthday'], data['vaccinations'].get('COVID-19'))}")
+    print(f"RSV: {check_rsv(data['birthday'], data['vaccinations'].get('RSV (Respiratorische Synzytial-Viren)'))}")
+
 
 def main():
     data = get_user_input()
