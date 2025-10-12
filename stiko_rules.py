@@ -62,3 +62,15 @@ def check_hepatitis_b(birthday_str, last_vaccination_str):
     if not last_vaccination_str:
         return "Impfung empfohlen bei beruflichem/gesundheitlichem Risiko (kein Nachweis vorhanden)."
     return "Impfung liegt vor – prüfen, ob vollständige Grundimmunisierung erfolgt ist."
+
+def check_hpv(birthday_str, last_vaccination_str):
+    birthday = parse_date(birthday_str)
+    today = datetime.now()
+    age = (today - birthday).days // 365
+
+    if age > 17:
+        return "Impfung nicht mehr empfohlen (älter als 17 Jahre)."
+    elif not last_vaccination_str:
+        return "HPV-Impfung empfohlen (nicht nachgewiesen)."
+    else:
+        return "HPV-Impfung liegt vor – prüfen, ob vollständig."
