@@ -143,3 +143,14 @@ def check_covid19(birthday_str, last_vaccination_str):
         return "Impfung liegt vor – Auffrischung prüfen (jährlich empfohlen)."
     else:
         return "COVID-19-Auffrischung nur für Risikogruppen empfohlen."
+
+def check_rsv(birthday_str, last_vaccination_str):
+    birthday = parse_date(birthday_str)
+    age = (datetime.now() - birthday).days // 365
+
+    if age >= 60:
+        if not last_vaccination_str:
+            return "RSV-Impfung empfohlen (nicht nachgewiesen)."
+        return "RSV-Impfung liegt vor."
+    else:
+        return "RSV-Impfung derzeit nur für ältere Erwachsene empfohlen."
