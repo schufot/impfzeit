@@ -57,3 +57,8 @@ def check_polio(birthday_str, last_vaccination_str):
         return "Auffrischimpfung fällig (letzte Impfung >10 Jahre her)."
     else:
         return "Auffrischimpfung nicht fällig."
+
+def check_hepatitis_b(birthday_str, last_vaccination_str):
+    if not last_vaccination_str:
+        return "Impfung empfohlen bei beruflichem/gesundheitlichem Risiko (kein Nachweis vorhanden)."
+    return "Impfung liegt vor – prüfen, ob vollständige Grundimmunisierung erfolgt ist."
