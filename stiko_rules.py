@@ -132,3 +132,14 @@ def check_influenza(birthday_str, last_vaccination_str):
     if last_vaccination < this_flu_season:
         return "Grippeimpfung für aktuelle Saison empfohlen."
     return "Grippeimpfung für aktuelle Saison erhalten."
+
+def check_covid19(birthday_str, last_vaccination_str):
+    birthday = parse_date(birthday_str)
+    age = (datetime.now() - birthday).days // 365
+
+    if age >= 60:
+        if not last_vaccination_str:
+            return "COVID-19-Impfung empfohlen (nicht nachgewiesen)."
+        return "Impfung liegt vor – Auffrischung prüfen (jährlich empfohlen)."
+    else:
+        return "COVID-19-Auffrischung nur für Risikogruppen empfohlen."
