@@ -86,3 +86,14 @@ def check_meningo_c(birthday_str, last_vaccination_str):
         return "Keine routinemäßige Impfung empfohlen im Erwachsenenalter."
     else:
         return "Impfung liegt vor."
+
+def check_mumps(birthday_str, last_vaccination_str):
+    return check_measles(birthday_str, last_vaccination_str)
+
+def check_rubella(birthday_str, last_vaccination_str):
+    return check_measles(birthday_str, last_vaccination_str)
+
+def check_varicella(birthday_str, last_vaccination_str):
+    if not last_vaccination_str:
+        return "Impfung empfohlen (kein Nachweis vorhanden)."
+    return "Impfung liegt vor – prüfen, ob vollständig."
