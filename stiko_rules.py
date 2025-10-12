@@ -74,3 +74,15 @@ def check_hpv(birthday_str, last_vaccination_str):
         return "HPV-Impfung empfohlen (nicht nachgewiesen)."
     else:
         return "HPV-Impfung liegt vor – prüfen, ob vollständig."
+
+def check_meningo_c(birthday_str, last_vaccination_str):
+    birthday = parse_date(birthday_str)
+    today = datetime.now()
+    age = (today - birthday).days // 365
+
+    if not last_vaccination_str and age <= 17:
+        return "Impfung gegen Meningokokken C empfohlen (nicht nachgewiesen)."
+    elif not last_vaccination_str:
+        return "Keine routinemäßige Impfung empfohlen im Erwachsenenalter."
+    else:
+        return "Impfung liegt vor."
