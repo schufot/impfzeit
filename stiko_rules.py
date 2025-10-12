@@ -121,3 +121,14 @@ def check_herpes_zoster(birthday_str, last_vaccination_str):
         return "Impfung liegt vor."
     else:
         return "Keine routinemäßige Impfung empfohlen (unter 60)."
+
+def check_influenza(birthday_str, last_vaccination_str):
+    if not last_vaccination_str:
+        return "Grippeimpfung empfohlen (nicht nachgewiesen)."
+    
+    last_vaccination = parse_date(last_vaccination_str)
+    this_flu_season = datetime(datetime.now().year, 9, 1)
+
+    if last_vaccination < this_flu_season:
+        return "Grippeimpfung für aktuelle Saison empfohlen."
+    return "Grippeimpfung für aktuelle Saison erhalten."
