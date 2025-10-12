@@ -97,3 +97,15 @@ def check_varicella(birthday_str, last_vaccination_str):
     if not last_vaccination_str:
         return "Impfung empfohlen (kein Nachweis vorhanden)."
     return "Impfung liegt vor – prüfen, ob vollständig."
+
+def check_pneumococcal(birthday_str, last_vaccination_str):
+    birthday = parse_date(birthday_str)
+    today = datetime.now()
+    age = (today - birthday).days // 365
+
+    if age >= 60:
+        if not last_vaccination_str:
+            return "Impfung empfohlen für Personen ab 60 (nicht nachgewiesen)."
+        return "Impfung liegt vor – Auffrischung alle 6 Jahre je nach Impfstoff prüfen."
+    else:
+        return "Keine Impfung routinemäßig empfohlen (unter 60, ohne Risikofaktoren)."
