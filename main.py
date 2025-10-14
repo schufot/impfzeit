@@ -1,32 +1,32 @@
 from datetime import datetime
 from save_data import save_data
 from stiko_rules import (
-    check_tetanus,
-    check_diphtheria,
-    check_pertussis,
-    check_measles,
+    check_tetanus, check_diphtheria, check_pertussis, check_measles,
+    check_polio, check_hepatitis_b, check_hpv, check_meningo_c,
+    check_mumps, check_rubella, check_varicella, check_pneumococcal,
+    check_herpes_zoster, check_influenza, check_covid19, check_rsv
 )
 
 DATE_FORMAT = "%d.%m.%Y"
 
-VACCINATIONS = [
-    "Tetanus",
-    "Diphtherie",
-    "Pertussis",
-    "Poliomyelitis",
-    "Hepatitis B",
-    "HPV",
-    "Meningokokken C",
-    "Masern",
-    "Mumps",
-    "Röteln",
-    "Varizellen",
-    "Pneumokokken",
-    "Herpes Zoster",
-    "Influenza",
-    "COVID-19",
-    "RSV (Respiratorische Synzytial-Viren)"
-]
+CHECK_FUNCTIONS = {
+    "Tetanus": check_tetanus,
+    "Diphtherie": check_diphtheria,
+    "Pertussis": check_pertussis,
+    "Masern": check_measles,
+    "Poliomyelitis": check_polio,
+    "Hepatitis B": check_hepatitis_b,
+    "HPV": check_hpv,
+    "Meningokokken C": check_meningo_c,
+    "Mumps": check_mumps,
+    "Röteln": check_rubella,
+    "Varizellen": check_varicella,
+    "Pneumokokken": check_pneumococcal,
+    "Herpes Zoster": check_herpes_zoster,
+    "Influenza": check_influenza,
+    "COVID-19": check_covid19,
+    "RSV (Respiratorische Synzytial-Viren)": check_rsv
+}
 
 def get_user_input():
     print("Willkommen zum Impfzeit-Programm basierend auf Empfehlungen der Ständigen Impfkommission (STIKO)\n")
