@@ -28,17 +28,27 @@ CHECK_FUNCTIONS = {
     "RSV (Respiratorische Synzytial-Viren)": check_rsv
 }
 
+def get_date_input(prompt):
+    while True:
+        value = input(prompt).strip()
+        if not value:
+            return None
+        try:
+            return datetime.strptime(value, DATE_FORMAT)
+        except ValueError:
+            print("Ungültiges Datum. Bitte im Format TT.MM.JJJJ eingeben.")
+
+
 def get_user_input():
     print("Willkommen zum Impfzeit-Programm basierend auf Empfehlungen der Ständigen Impfkommission (STIKO)\n")
     
     name = input("Wie ist dein Name? > ").strip()
 
-    birthday_str = input("Wann wurdest du geboren? (TT.MM.JJJJ) > ").strip()
-    try:
-        birthday = datetime.strptime(birthday_str, DATE_FORMAT)
-    except ValueError:
-        print("Ungültiges Datum. Bitte im Format TT.MM.JJJJ eingeben.")
+    birthday = get_date_input("Wann wurdest du geboren? (TT.MM.JJJJ) > ")
+    if not birthday:
+        print("Geburtsdatum ist erforderlich.")
         return None
+
 
     sex = input("Geschlecht (männlich/weiblich/divers) > ").strip().lower()
 
@@ -46,16 +56,8 @@ def get_user_input():
     print("\nBitte gib das Datum deiner letzten Impfung ein (TT.MM.JJJJ). Wenn unbekannt, einfach leer lassen.")
     
     for vaccine in VACCINATIONS:
-        date_input = input(f"{vaccine}: ").strip()
-        if date_input:
-            try:
-                date_parsed = datetime.strptime(date_input, DATE_FORMAT).strftime(DATE_FORMAT)
-                vaccinations[vaccine] = date_parsed
-            except ValueError:
-                print("Ungültiges Datum – überspringe diese Impfung.")
-                vaccinations[vaccine] = None
-        else:
-            vaccinations[vaccine] = None
+        date = get_date_input(f"{vaccine}: ")
+        vaccinations[vaccine] = date.strftime(DATE_FORMAT) if date else None
 
     user_data = {
         "name": name,
