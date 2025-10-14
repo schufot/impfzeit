@@ -61,7 +61,7 @@ def get_user_input():
 
     user_data = {
         "name": name,
-        "birthday": birthday.strftime(DATE_FORMAT),
+        "birthday": birthday,
         "sex": sex,
         "vaccinations": vaccinations
     }
