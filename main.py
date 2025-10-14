@@ -9,6 +9,25 @@ from stiko_rules import (
 
 DATE_FORMAT = "%d.%m.%Y"
 
+VACCINATIONS = [
+    "Tetanus",
+    "Diphtherie",
+    "Pertussis",
+    "Poliomyelitis",
+    "Hepatitis B",
+    "HPV",
+    "Meningokokken C",
+    "Masern",
+    "Mumps",
+    "Röteln",
+    "Varizellen",
+    "Pneumokokken",
+    "Herpes Zoster",
+    "Influenza",
+    "COVID-19",
+    "RSV (Respiratorische Synzytial-Viren)"
+]
+
 CHECK_FUNCTIONS = {
     "Tetanus": check_tetanus,
     "Diphtherie": check_diphtheria,
